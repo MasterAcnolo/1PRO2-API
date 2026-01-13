@@ -470,7 +470,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiBoardBoard extends Struct.CollectionTypeSchema {
   collectionName: 'boards';
   info: {
-    displayName: 'Board';
+    displayName: 'BOARD';
     pluralName: 'boards';
     singularName: 'board';
   };
@@ -481,11 +481,102 @@ export interface ApiBoardBoard extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Email: Schema.Attribute.Email;
-    Label: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::board.board'> &
       Schema.Attribute.Private;
+    NAME: Schema.Attribute.String;
+    OWNER_ID: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCardCard extends Struct.CollectionTypeSchema {
+  collectionName: 'cards';
+  info: {
+    displayName: 'CARD';
+    pluralName: 'cards';
+    singularName: 'card';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    COLOR: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    DESCRIPTION: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::card.card'> &
+      Schema.Attribute.Private;
+    ORDER: Schema.Attribute.Integer;
+    OWNER_ID: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    TITRE: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiColumnColumn extends Struct.CollectionTypeSchema {
+  collectionName: 'columns';
+  info: {
+    displayName: 'COLUMN';
+    pluralName: 'columns';
+    singularName: 'column';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    BOARD_ID: Schema.Attribute.Relation<'oneToOne', 'api::board.board'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::column.column'
+    > &
+      Schema.Attribute.Private;
+    NAME: Schema.Attribute.String;
+    ORDER: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLabelLabel extends Struct.CollectionTypeSchema {
+  collectionName: 'labels';
+  info: {
+    displayName: 'LABEL';
+    pluralName: 'labels';
+    singularName: 'label';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    COLOR: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::label.label'> &
+      Schema.Attribute.Private;
+    NAME: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -951,6 +1042,7 @@ export interface PluginUsersPermissionsUser
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    boards: Schema.Attribute.Relation<'oneToMany', 'api::board.board'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1005,6 +1097,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::board.board': ApiBoardBoard;
+      'api::card.card': ApiCardCard;
+      'api::column.column': ApiColumnColumn;
+      'api::label.label': ApiLabelLabel;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

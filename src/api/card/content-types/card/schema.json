@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cards",
+  "info": {
+    "singularName": "card",
+    "pluralName": "cards",
+    "displayName": "CARD"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "TITRE": {
+      "type": "string"
+    },
+    "DESCRIPTION": {
+      "type": "text"
+    },
+    "ORDER": {
+      "type": "integer"
+    },
+    "COLOR": {
+      "type": "string"
+    },
+    "OWNER_ID": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

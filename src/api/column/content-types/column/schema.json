@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "columns",
+  "info": {
+    "singularName": "column",
+    "pluralName": "columns",
+    "displayName": "COLUMN"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "NAME": {
+      "type": "string"
+    },
+    "ORDER": {
+      "type": "integer"
+    },
+    "BOARD_ID": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::board.board"
+    }
+  }
+}

@@ -68,6 +68,12 @@
     },
     "reconnect": {
       "type": "boolean"
+    },
+    "boards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::board.board",
+      "mappedBy": "OWNER_ID"
     }
   }
 }
