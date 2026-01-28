@@ -7,18 +7,25 @@
     "displayName": "BOARD"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "NAME": {
-      "type": "string"
+    "name": {
+      "type": "string",
+      "required": true
     },
-    "OWNER_ID": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "boards"
+    },
+    "columns": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::column.column",
+      "mappedBy": "board_id"
     }
   }
 }

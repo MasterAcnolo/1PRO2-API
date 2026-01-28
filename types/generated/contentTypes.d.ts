@@ -475,24 +475,25 @@ export interface ApiBoardBoard extends Struct.CollectionTypeSchema {
     singularName: 'board';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    columns: Schema.Attribute.Relation<'oneToMany', 'api::column.column'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::board.board'> &
       Schema.Attribute.Private;
-    NAME: Schema.Attribute.String;
-    OWNER_ID: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -504,24 +505,25 @@ export interface ApiCardCard extends Struct.CollectionTypeSchema {
     singularName: 'card';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    COLOR: Schema.Attribute.String;
+    color: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 6;
+      }> &
+      Schema.Attribute.DefaultTo<'FFFFFF'>;
+    column: Schema.Attribute.Relation<'manyToOne', 'api::column.column'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    DESCRIPTION: Schema.Attribute.Text;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::card.card'> &
       Schema.Attribute.Private;
-    ORDER: Schema.Attribute.Integer;
-    OWNER_ID: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    TITRE: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -536,10 +538,11 @@ export interface ApiColumnColumn extends Struct.CollectionTypeSchema {
     singularName: 'column';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    BOARD_ID: Schema.Attribute.Relation<'oneToOne', 'api::board.board'>;
+    board_id: Schema.Attribute.Relation<'manyToOne', 'api::board.board'>;
+    cards: Schema.Attribute.Relation<'oneToMany', 'api::card.card'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -549,8 +552,8 @@ export interface ApiColumnColumn extends Struct.CollectionTypeSchema {
       'api::column.column'
     > &
       Schema.Attribute.Private;
-    NAME: Schema.Attribute.String;
-    ORDER: Schema.Attribute.Integer;
+    name: Schema.Attribute.String;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -566,17 +569,21 @@ export interface ApiLabelLabel extends Struct.CollectionTypeSchema {
     singularName: 'label';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    COLOR: Schema.Attribute.String;
+    color: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 6;
+      }> &
+      Schema.Attribute.DefaultTo<'FFFFFF'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::label.label'> &
       Schema.Attribute.Private;
-    NAME: Schema.Attribute.String;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1041,15 +1048,22 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    blocked: Schema.Attribute.Boolean &
+      Schema.Attribute.Configurable &
+      Schema.Attribute.DefaultTo<false>;
     boards: Schema.Attribute.Relation<'oneToMany', 'api::board.board'>;
-    confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
-    confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    confirmationToken: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.Configurable;
+    confirmed: Schema.Attribute.Boolean &
+      Schema.Attribute.Configurable &
+      Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
+      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
@@ -1061,22 +1075,27 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.Private;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
+      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    provider: Schema.Attribute.String;
+    provider: Schema.Attribute.String & Schema.Attribute.Configurable;
     publishedAt: Schema.Attribute.DateTime;
-    resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
+    resetPasswordToken: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.Configurable;
     role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
-    >;
+    > &
+      Schema.Attribute.Configurable;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
+      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;

@@ -7,20 +7,27 @@
     "displayName": "COLUMN"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "NAME": {
+    "name": {
       "type": "string"
     },
-    "ORDER": {
+    "order": {
       "type": "integer"
     },
-    "BOARD_ID": {
+    "board_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::board.board"
+      "relation": "manyToOne",
+      "target": "api::board.board",
+      "inversedBy": "columns"
+    },
+    "cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::card.card",
+      "mappedBy": "column"
     }
   }
 }

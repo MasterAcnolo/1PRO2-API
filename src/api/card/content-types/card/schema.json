@@ -7,26 +7,34 @@
     "displayName": "CARD"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "TITRE": {
-      "type": "string"
+    "name": {
+      "type": "string",
+      "required": true
     },
-    "DESCRIPTION": {
-      "type": "text"
+    "description": {
+      "type": "text",
+      "required": false
     },
-    "ORDER": {
-      "type": "integer"
+    "order": {
+      "type": "integer",
+      "required": true,
+      "unique": false
     },
-    "COLOR": {
-      "type": "string"
+    "color": {
+      "type": "string",
+      "default": "FFFFFF",
+      "maxLength": 6,
+      "required": false
     },
-    "OWNER_ID": {
+    "column": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "relation": "manyToOne",
+      "target": "api::column.column",
+      "inversedBy": "cards"
     }
   }
 }

@@ -7,15 +7,17 @@
     "displayName": "LABEL"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "NAME": {
+    "name": {
       "type": "string"
     },
-    "COLOR": {
-      "type": "string"
+    "color": {
+      "type": "string",
+      "default": "FFFFFF",
+      "maxLength": 6
     }
   }
 }
