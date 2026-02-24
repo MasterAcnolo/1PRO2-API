@@ -15,7 +15,8 @@
       "type": "string"
     },
     "order": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "board_id": {
       "type": "relation",

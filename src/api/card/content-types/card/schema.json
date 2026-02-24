@@ -35,6 +35,9 @@
       "relation": "manyToOne",
       "target": "api::column.column",
       "inversedBy": "cards"
+    },
+    "deadline": {
+      "type": "datetime"
     }
   }
 }

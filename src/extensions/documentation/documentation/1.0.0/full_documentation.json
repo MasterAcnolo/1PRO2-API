@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-02-11T10:31:38.462Z"
+    "x-generation-date": "2026-02-24T13:22:08.924Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4159,6 +4159,10 @@
                                     }
                                   }
                                 },
+                                "deadline": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
                                 "createdAt": {
                                   "type": "string",
                                   "format": "date-time"
@@ -4487,6 +4491,10 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "deadline": {
+                "type": "string",
+                "format": "date-time"
               },
               "locale": {
                 "type": "string"
@@ -5211,6 +5219,10 @@
                         }
                       }
                     },
+                    "deadline": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -5318,6 +5330,10 @@
               }
             }
           },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -5389,6 +5405,9 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "order"
+            ],
             "type": "object",
             "properties": {
               "name": {
@@ -5480,6 +5499,9 @@
       },
       "Column": {
         "type": "object",
+        "required": [
+          "order"
+        ],
         "properties": {
           "id": {
             "type": "number"
@@ -6080,6 +6102,10 @@
                                 "type": "string"
                               }
                             }
+                          },
+                          "deadline": {
+                            "type": "string",
+                            "format": "date-time"
                           },
                           "createdAt": {
                             "type": "string",
