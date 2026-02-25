@@ -1012,22 +1012,15 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    blocked: Schema.Attribute.Boolean &
-      Schema.Attribute.Configurable &
-      Schema.Attribute.DefaultTo<false>;
+    blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     boards: Schema.Attribute.Relation<'oneToMany', 'api::board.board'>;
-    confirmationToken: Schema.Attribute.String &
-      Schema.Attribute.Private &
-      Schema.Attribute.Configurable;
-    confirmed: Schema.Attribute.Boolean &
-      Schema.Attribute.Configurable &
-      Schema.Attribute.DefaultTo<false>;
+    confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
+    confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
-      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
@@ -1039,29 +1032,24 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.Private;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
-      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    provider: Schema.Attribute.String & Schema.Attribute.Configurable;
+    provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    resetPasswordToken: Schema.Attribute.String &
-      Schema.Attribute.Private &
-      Schema.Attribute.Configurable;
+    resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
-    > &
-      Schema.Attribute.Configurable;
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
-      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
-        minLength: 3;
+        maxLength: 23;
       }>;
   };
 }
