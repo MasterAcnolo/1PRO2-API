@@ -38,6 +38,9 @@
     },
     "deadline": {
       "type": "datetime"
+    },
+    "labels": {
+      "type": "string"
     }
   }
 }

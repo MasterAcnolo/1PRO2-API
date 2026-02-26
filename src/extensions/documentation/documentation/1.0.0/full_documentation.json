@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-02-25T16:22:22.747Z"
+    "x-generation-date": "2026-02-26T08:05:05.139Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4163,6 +4163,9 @@
                                   "type": "string",
                                   "format": "date-time"
                                 },
+                                "labels": {
+                                  "type": "string"
+                                },
                                 "createdAt": {
                                   "type": "string",
                                   "format": "date-time"
@@ -4495,6 +4498,9 @@
               "deadline": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "labels": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -5223,6 +5229,9 @@
                       "type": "string",
                       "format": "date-time"
                     },
+                    "labels": {
+                      "type": "string"
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -5333,6 +5342,9 @@
           "deadline": {
             "type": "string",
             "format": "date-time"
+          },
+          "labels": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -6107,6 +6119,9 @@
                             "type": "string",
                             "format": "date-time"
                           },
+                          "labels": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -6355,12 +6370,6 @@
           "data": {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string"
-              },
-              "color": {
-                "type": "string"
-              },
               "locale": {
                 "type": "string"
               },
@@ -6424,12 +6433,6 @@
             "type": "number"
           },
           "documentId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "color": {
             "type": "string"
           },
           "createdAt": {
@@ -6730,12 +6733,6 @@
                   "type": "number"
                 },
                 "documentId": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "color": {
                   "type": "string"
                 },
                 "createdAt": {

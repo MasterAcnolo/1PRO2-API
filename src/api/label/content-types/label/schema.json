@@ -10,14 +10,5 @@
     "draftAndPublish": false
   },
   "pluginOptions": {},
-  "attributes": {
-    "name": {
-      "type": "string"
-    },
-    "color": {
-      "type": "string",
-      "default": "FFFFFF",
-      "maxLength": 6
-    }
-  }
+  "attributes": {}
 }
