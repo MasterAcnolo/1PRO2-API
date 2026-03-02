@@ -29,7 +29,6 @@ Task Loader API est une API REST construite avec **Strapi v5** permettant de cr�
 | **Boards** | Création et gestion de tableaux Kanban |
 | **Colonnes** | Organisation des tâches par colonnes ordonnées |
 | **Cartes** | Tâches avec description, couleur et ordre personnalisable |
-| **Labels** | Étiquettes pour catégoriser les cartes |
 | **Middleware is-owner** | Protection des ressources par vérification de propriété |
 | **Cascade Delete** | Suppression automatique des ressources enfants |
 
@@ -110,16 +109,6 @@ npm run dev
 | `POST` | `/api/cards` | Créer une carte | ✅ |
 | `PUT` | `/api/cards/:id` | Modifier une carte | ✅ + Owner |
 | `DELETE` | `/api/cards/:id` | Supprimer une carte | ✅ + Owner |
-
-### Labels
-
-| Méthode | Endpoint | Description | Auth |
-|---------|----------|-------------|------|
-| `GET` | `/api/labels` | Liste des labels | ✅ |
-| `GET` | `/api/labels/:id` | Détails d'un label | ✅ |
-| `POST` | `/api/labels` | Créer un label | ✅ |
-| `PUT` | `/api/labels/:id` | Modifier un label | ✅ |
-| `DELETE` | `/api/labels/:id` | Supprimer un label | ✅ |
 
 ---
 
