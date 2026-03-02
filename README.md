@@ -46,8 +46,8 @@ Task Loader API est une API REST construite avec **Strapi v5** permettant de cr√
 
 ```bash
 # 1. Cloner le repository
-git clone https://github.com/votre-username/task-loader-api.git
-cd task-loader-api
+git clone https://github.com/MasterAcnolo/1PRO2-API
+cd 1PRO2-API
 
 # 2. Installer les d√©pendances
 npm install
