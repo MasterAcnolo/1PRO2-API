@@ -233,7 +233,7 @@ module.exports = ({ env }) => ({
 ## Structure du projet
 
 ```
-task-loader-api/
+1PRO2-API/
 ├── config/
 │   ├── admin.js           # Configuration admin
 │   ├── api.js             # Configuration API
