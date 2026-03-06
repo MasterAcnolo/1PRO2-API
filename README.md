@@ -260,7 +260,6 @@ module.exports = ({ env }) => ({
 │       └── users-permissions/
 │           └── strapi-server.js      # Extension User
 ├── public/                           # Fichiers statiques
-├── database/migrations/              # Migrations BDD
 └── types/generated/                  # Types TypeScript générés
 ```
 
